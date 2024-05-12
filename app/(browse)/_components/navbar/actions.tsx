@@ -1,10 +1,10 @@
 import { authOptions } from "@/app/api/auth/libs/auth";
 import { Session, getServerSession } from "next-auth";
-import { Button } from "./ui/button";
+import { Button } from "../../../../components/ui/button";
 import Link from "next/link";
 import { Clapperboard } from "lucide-react";
-import { SigninButton } from "./SigninButton";
-import { ProfileMenu } from "./ProfileMenu";
+import { SigninButton } from "../../../../components/SigninButton";
+import { ProfileMenu } from "../../../../components/ProfileMenu";
 
 export const Actions = async () => {
   const session: Session | null = await getServerSession(authOptions);

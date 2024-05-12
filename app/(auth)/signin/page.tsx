@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
 import { getProviders, signIn } from "next-auth/react";
@@ -13,13 +14,15 @@ function onClickSignin() {
 
 export default function signin() {
   return (
-    <div
-      className="cursor-pointer border py-3 px-6 rounded-lg flex items-center"
+    <Button
+      variant={"outline"}
+      size={"lg"}
+      className="cursor-pointer text-base bg-transparent py-6 px-10 select-none hover:opacity-90 transition hover:transition"
       onClick={onClickSignin}
     >
       <img className="mr-2" title="Google Icon" src="/google.svg" />
       Continue with Google
-    </div>
+    </Button>
   );
   {
     /* <div>

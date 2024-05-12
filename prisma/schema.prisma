@@ -14,14 +14,44 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  username String? @unique
-  email String @unique
-  imageUrl String? @db.Text
-  bio String? @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  username   String?  @unique
+  email      String   @unique
+  imageUrl   String?  @db.Text
+  bio        String?  @db.Text
+  following  Follow[] @relation("following")
+  followedBy Follow[] @relation("FollowedBy")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Blocking   Block[]  @relation("Blocking")
+  BlockedBy  Block[]  @relation("BlockedBy")
 
   @@unique([username, email])
 }
 
+model Follow {
+  id          String @id @default(uuid())
+  followerId  String
+  followingId String
+  follower    User   @relation(name: "following", fields: [followerId], references: [id], onDelete: Cascade)
+
+  following User @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@index([followerId])
+  @@index([followingId])
+}
+
+model Block {
+  id        String @id @default(uuid())
+  blockerId String
+  blockedId String
+  blocker   User   @relation(name: "Blocking", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked   User   @relation(name: "BlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@unique([blockedId, blockerId])
+  @@index([blockedId])
+  @@index([blockerId])
+}

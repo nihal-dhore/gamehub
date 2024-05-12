@@ -19,7 +19,7 @@ export const ProfileMenu = () => {
   const router = useRouter();
 
   return (
-    <div className="shrink-0 mr-3">
+    <div className="shrink-0">
       <DropdownMenu>
         {/* <div className="cursor-pointer absolute top-11 z-50 border rounded-lg w-[12%]">
       <ul className="text-center">
@@ -36,7 +36,7 @@ export const ProfileMenu = () => {
         <DropdownMenuTrigger asChild>
           {session.data?.user && (
             <img
-              className="w-8 h-8 rounded-full cursor-pointer border-2 border-purple-400 p-[1px] mr-3"
+              className="w-8 h-8 rounded-full cursor-pointer border-2 border-purple-400 p-[1px]"
               src={session.data.user.imageUrl!}
               alt="Pic"
             ></img>

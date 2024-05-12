@@ -5,7 +5,7 @@ import { GoogleProfile } from "next-auth/providers/google";
 declare module "next-auth" {
   interface Session {
     user: {
-      id: string | undefined;
+      id: string;
       username: string | null;
       imageUrl: string | null; a
     }

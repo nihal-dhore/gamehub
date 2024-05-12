@@ -1,11 +1,12 @@
-import { Navbar } from "@/components/Navbar";
+
 import { Sidebar, SidebarSkeleton } from "@/app/(browse)/_components/sidebar";
-import { Container } from "../_components/container";
+import { Container } from "./_components/container";
 import { Session, getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/libs/auth";
 import { UpdateScreen } from "@/components/UpdateScreen";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { Navbar } from "./_components/navbar";
 
 export default async function BrowseLayout({
   children,

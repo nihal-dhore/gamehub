@@ -25,7 +25,7 @@ export const UserItem = ({ username, imageUrl, isLive }: UserItemProps) => {
     <Button
       variant={"ghost"}
       className={cn(
-        "w-full h12",
+        "w-full h-12",
         collapsed ? "justify-center" : "justify-start",
         isActive && "bg-accent"
       )}
@@ -43,6 +43,7 @@ export const UserItem = ({ username, imageUrl, isLive }: UserItemProps) => {
             username={username!}
             isLive={isLive}
             showBadge={true}
+            size={"default"}
           />
           {!collapsed && <p className="truncate">{username}</p>}
           {!collapsed && isLive && <LiveBadge className="ml-auto" />}

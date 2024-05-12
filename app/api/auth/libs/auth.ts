@@ -60,7 +60,7 @@ export const authOptions: any = {
           })
 
           if (!user) {
-            console.log(user);
+            //console.log(user);
 
             const newUser = await db.user.create({
               data: {
@@ -68,7 +68,7 @@ export const authOptions: any = {
                 imageUrl: profile.picture
               }
             })
-            console.log(newUser);
+            //console.log(newUser);
 
           }
 

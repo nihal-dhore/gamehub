@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 export async function POST(req: NextRequest, res: NextResponse) {
   const body: User = await req.json();
 
-  console.log(body);
+  // console.log(body);
 
   const session: Session | null = await getServerSession(authOptions);
   //console.log(session);
@@ -29,8 +29,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         id: session.user.id
       }
     })
-    console.log(user);
-    
+    //console.log(user);
+
 
     if (!user) {
       return NextResponse.json({
@@ -47,8 +47,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         bio: body.bio || undefined
       }
     })
-    console.log(userUpdate);
-    
+    //console.log(userUpdate);
+
 
     return NextResponse.json({
       message: "User Updated successfully"

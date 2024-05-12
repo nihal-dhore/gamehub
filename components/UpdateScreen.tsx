@@ -26,19 +26,25 @@ import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { authOptions } from "@/app/api/auth/libs/auth";
 import { cn } from "@/lib/utils";
+import { Poppins } from "next/font/google";
 
-export const UpdateScreen = () => {
+const font = Poppins({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+export const UpdateScreen = ({ isUpdatePage }: { isUpdatePage?: boolean }) => {
   const form = useForm<zod.output<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
   });
-  const session = useSession(authOptions);
+
   const [update, setUpdate] = useState(false);
   const [available, setAvailable] = useState<boolean>(false);
   const [unavailable, setUnavailable] = useState(false);
+  const session = useSession(authOptions);
   const router = useRouter();
-
   if (!session) {
-    router.push("/");
+    redirect("/");
   }
 
   const onSubmit: SubmitHandler<zod.output<typeof UserSchema>> = async (
@@ -47,7 +53,7 @@ export const UpdateScreen = () => {
   ) => {
     e?.preventDefault();
     try {
-      console.log(data);
+      //console.log(data);
 
       const res = await axios.post("http://localhost:3000/api/user-update", {
         username: data.username,
@@ -56,7 +62,7 @@ export const UpdateScreen = () => {
       //console.log(res);
 
       setUpdate(true);
-      router.push("/");
+      router.refresh();
     } catch (error) {
       setUpdate(false);
       console.log(error);
@@ -65,7 +71,7 @@ export const UpdateScreen = () => {
 
   useEffect(() => {
     const timeId = setTimeout(() => {
-      console.log(form.getValues("username"));
+      //console.log(form.getValues("username"));
 
       const res = axios
         .get(
@@ -74,12 +80,12 @@ export const UpdateScreen = () => {
           )}`
         )
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           if (res.data.error) {
             setUnavailable(true);
             setAvailable(false);
           }
-          if (res.data.message) {
+          if (res.data.message && form.getValues("username")) {
             setUnavailable(false);
             setAvailable(true);
           }
@@ -96,24 +102,28 @@ export const UpdateScreen = () => {
       if (res.data.status === 404) {
         setUnavailable(true);
       } */
-    }, 2000);
-    console.log(form.getValues("username"));
+    }, 500);
+    //console.log(form.getValues("username"));
 
     return () => clearTimeout(timeId);
   }, [form.getValues("username")]);
   return (
     <div
       className={cn(
-        "relative h-[91vh] w-full flex justify-center items-center z-50 bg-gray-500 bg-opacity-35",
-        session.data?.user.username ? "static bg-transparent" : "relative"
+        "relative h-screen w-full flex justify-center items-center z-50 bg-gray-500 bg-opacity-35",
+        session.data?.user.username ? "static bg-transparent" : "relative",
+        isUpdatePage && "h-[91vh]"
       )}
     >
       <div className="w-96 rounded-xl border p-10 bg-[#171717]">
+        
         <Form {...form}>
           <form
             className="flex flex-col gap-3"
             onSubmit={form.handleSubmit(onSubmit)}
           >
+            {!isUpdatePage && <div className="text-2xl text-center font-semibold mb-2">Fill missing details
+            <div className="text-muted-foreground text-sm font-normal">to continue to gamehub</div></div>}
             <FormField
               control={form.control}
               name="username"
@@ -157,7 +167,7 @@ export const UpdateScreen = () => {
               )}
             />
             {update && (
-              <div className="text-green-700">
+              <div className="text-green-700 text-sm">
                 &#x2713; Profile updated successfully
               </div>
             )}

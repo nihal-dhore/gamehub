@@ -1,6 +1,6 @@
 import { Logo } from "@/app/(browse)/_components/navbar/logo";
 import { Search } from "@/app/(browse)/_components/navbar/search";
-import { Actions } from "./Actions";
+import { Actions } from "./actions";
 
 export const Navbar = () => {
   return (

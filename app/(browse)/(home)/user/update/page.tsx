@@ -5,11 +5,12 @@ import { redirect } from "next/navigation";
 
 export default async function Update() {
   const session: Session | null = await getServerSession(authOptions);
+
   //console.log(session);
   
   return (
     <>
-      {session?.user && <UpdateScreen />}
+      {session?.user && <UpdateScreen isUpdatePage={true} />}
       {!session?.user && redirect("/signin")}
     </>
   );

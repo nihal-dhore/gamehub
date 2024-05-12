@@ -3,7 +3,6 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Avatar } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { LiveBadge } from "@/components/live-badge";
 import { Skeleton } from "./ui/skeleton";
 
 const avatarSizes = cva("", {
@@ -42,7 +41,7 @@ export const UserAvatar = ({
         )}
       >
         <AvatarImage src={imageUrl} className="object-cover" />
-        <AvatarFallback>
+        <AvatarFallback className="w-full text-center">
           {username[0]}
           {username[username.length - 1]}
         </AvatarFallback>
