@@ -65,7 +65,7 @@ export const authOptions: any = {
             const newUser = await db.user.create({
               data: {
                 email: profile.email!,
-                imageUrl: profile.picture
+                imageUrl: profile.picture,
               }
             })
             //console.log(newUser);

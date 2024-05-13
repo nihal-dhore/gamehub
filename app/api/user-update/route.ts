@@ -14,7 +14,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 
   if (!session) {
-    return NextResponse.json({ error: "Unauthorized Request" }, { status: 400 })
+    return NextResponse.json({ error: "Unauthorized Request" }, { status: 400 });
   }
   const userValidation = UserSchema.safeParse(body);
 
@@ -28,14 +28,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
       where: {
         id: session.user.id
       }
-    })
+    });
     //console.log(user);
 
 
     if (!user) {
       return NextResponse.json({
         error: "User not found"
-      }, { status: 404 })
+      }, { status: 404 });
     }
 
     const userUpdate = await db.user.update({
@@ -44,20 +44,25 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
       data: {
         username: body.username || undefined,
-        bio: body.bio || undefined
+        bio: body.bio || undefined,
+        stream: {
+          create: {
+            name: `${body.username}'s stream` || `Your Stream`
+          }
+        }
       }
-    })
+    });
     //console.log(userUpdate);
 
 
     return NextResponse.json({
       message: "User Updated successfully"
-    })
+    });
 
   } catch (error) {
     console.log(error);
     return NextResponse.json({
       error: "Internal server error"
-    })
+    });
   }
 }

@@ -2,6 +2,16 @@ import { authOptions } from "@/app/api/auth/libs/auth";
 import { Session, getServerSession } from "next-auth";
 import { db } from "./db";
 
+
+export const getSelf = async() => {
+  const session: Session | null = await getServerSession(authOptions);
+
+  if (!session || !session.user.username) {
+    throw new Error("Unauthorized Request");
+  }
+  return session.user;
+}
+
 export const getSelfByUsername = async (username: string) => {
   const session: Session | null = await getServerSession(authOptions);
 

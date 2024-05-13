@@ -4,7 +4,7 @@ import { authOptions } from "@/app/api/auth/libs/auth";
 import { Fullscreen, KeyRound, MessageSquare, Users } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { NavItem } from "./nav-item";
+import { NavItem, NavItemSkeleton } from "./nav-item";
 
 export const Navigation = () => {
   const { data } = useSession(authOptions);
@@ -32,6 +32,16 @@ export const Navigation = () => {
       icon: Users,
     },
   ];
+
+  if (!data) {
+    return (
+      <ul>
+        {[...Array(4)].map((_, i) => (
+          <NavItemSkeleton key={i} />
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <ul className="space-y-2 px-2 pt-4 lg:pt-0">
