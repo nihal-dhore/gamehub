@@ -17,7 +17,7 @@ export const Wrapper = ({ children }: WrapperProps) => {
 
   useEffect(() => {
     setClient(true);
-    console.log(client);
+    //console.log(client);
   }, []);
 
   if (!client) {

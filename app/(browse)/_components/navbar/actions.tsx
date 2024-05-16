@@ -11,10 +11,10 @@ export const Actions = async () => {
   //console.log(session);
 
   return (
-    <div className="flex items-center justify-end gap-x-2 ml-4">
+    <div className="flex items-center justify-end gap-x-2 ">
       {!session?.user && <SigninButton />}
       {session?.user && (
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-x-4 mr-5 ml-2 lg:mr-0">
           <Button
             size={"sm"}
             variant={"ghost"}

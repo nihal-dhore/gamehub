@@ -20,15 +20,22 @@ export const getRecommended = async () => {
               }
             }
           }
-        },{
+        }, {
           NOT: {
             Blocking: {
               some: {
-                blockedId:session?.user.id
+                blockedId: session?.user.id
               }
             }
           }
         }]
+      },
+      include: {
+        stream: {
+          select: {
+            isLive: true
+          }
+        },
       },
       orderBy: {
         createdAt: "desc"
