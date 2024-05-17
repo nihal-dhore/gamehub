@@ -1,37 +1,42 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { createViewerToken } from "../actions/token";
+import { createViewerToken } from "@/actions/token";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 
 export const useViewerToken = (hostIdentity: string) => {
   const [token, setToken] = useState("");
   const [name, setName] = useState("");
-
   const [identity, setIdentity] = useState("");
-  console.log(hostIdentity);
+  //console.log(hostIdentity);
 
 
   useEffect(() => {
+    //console.log("useEffect");
     const createToken = async () => {
+
       try {
         const viewerToken = await createViewerToken(hostIdentity);
+        console.log(`viewerToken ${viewerToken}`);
+
         setToken(viewerToken);
+        //console.log(token);
+
 
         const decodeToken = jwtDecode(viewerToken) as JwtPayload & {
           name?: string;
         };
 
         const name = decodeToken.name;
-        const identity = decodeToken.jti;
-        console.log(identity);
-        
+        const id = decodeToken.sub;
+        console.log(decodeToken);
 
-        if (identity) {
-          setIdentity(identity);
+
+        if (id) {
+          setIdentity(id);          
         }
 
         if (name) {
-          setName(name);
+          setName(name);         
         }
 
       } catch {
@@ -40,6 +45,9 @@ export const useViewerToken = (hostIdentity: string) => {
     };
     createToken();
   }, [hostIdentity]);
+
+  //console.log({ token, name, identity });
+
 
   return { token, name, identity };
 };

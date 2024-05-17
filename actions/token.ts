@@ -13,12 +13,12 @@ export const createViewerToken = async (hostIdentity: string) => {
     self = await getSelf();
   } catch {
     const id = v4();
-    const username = `guest${Math.floor(Math.random() * 1000)}`;
+    const username = `guest#${Math.floor(Math.random() * 1000)}`;
     self = { id, username };
   }
 
   const host = await getUserById(hostIdentity);
-  console.log(host);
+  //console.log(host);
   
 
   if (!host) {
@@ -48,6 +48,9 @@ export const createViewerToken = async (hostIdentity: string) => {
     canPublish: false,
     canPublishData: true
   });
+
+  //console.log(await Promise.resolve(token.toJwt()));
+  
 
   return await Promise.resolve(token.toJwt());
 };
