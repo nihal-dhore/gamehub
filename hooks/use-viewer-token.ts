@@ -16,7 +16,7 @@ export const useViewerToken = (hostIdentity: string) => {
 
       try {
         const viewerToken = await createViewerToken(hostIdentity);
-        console.log(`viewerToken ${viewerToken}`);
+        //console.log(`viewerToken ${viewerToken}`);
 
         setToken(viewerToken);
         //console.log(token);
@@ -28,7 +28,7 @@ export const useViewerToken = (hostIdentity: string) => {
 
         const name = decodeToken.name;
         const id = decodeToken.sub;
-        console.log(decodeToken);
+        //console.log(decodeToken);
 
 
         if (id) {
