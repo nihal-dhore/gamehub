@@ -40,9 +40,9 @@ export const ChatForm = ({
 
     if (isChatDelayed && !isDelayBlocked) {
       setIsDelayBlocked(true);
+      onSubmit();
       setTimeout(() => {
         setIsDelayBlocked(false);
-        onSubmit();
       }, 3000);
     } else {
       onSubmit();
@@ -68,7 +68,6 @@ export const ChatForm = ({
             onChange(e.target.value);
           }}
           value={value}
-          disabled={isDisabled}
           placeholder="send a message"
           className={cn(
             "border-white/10",
