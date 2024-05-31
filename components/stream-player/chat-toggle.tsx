@@ -6,17 +6,19 @@ import { Hint } from "../hint";
 import { Button } from "@/components/ui/button";
 
 export const ChatToggle = () => {
-  const { collapsed, onCollapse, onExpand } = useChatSidebar((state) => state);
-  let Icon = collapsed ? ArrowLeftFromLine : ArrowRightFromLine;
+  const { chatCollapsed, onCollapse, onExpand } = useChatSidebar(
+    (state) => state
+  );
+  let Icon = chatCollapsed ? ArrowLeftFromLine : ArrowRightFromLine;
   const onToggle = () => {
-    if (collapsed) {
+    if (chatCollapsed) {
       onExpand();
     } else {
       onCollapse();
     }
   };
 
-  const label = collapsed ? "Expand" : "Collapse";
+  const label = chatCollapsed ? "Expand" : "Collapse";
   return (
     <Hint label={label} side="left" asChild>
       <Button

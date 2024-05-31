@@ -6,7 +6,7 @@ import { JwtPayload, jwtDecode } from "jwt-decode";
 export const useViewerToken = (hostIdentity: string) => {
   const [token, setToken] = useState("");
   const [name, setName] = useState("");
-  const [identity, setIdentity] = useState("");
+  const [viewerIdentity, setViewerIdentity] = useState("");
   //console.log(hostIdentity);
 
 
@@ -32,11 +32,11 @@ export const useViewerToken = (hostIdentity: string) => {
 
 
         if (id) {
-          setIdentity(id);          
+          setViewerIdentity(id);
         }
 
         if (name) {
-          setName(name);         
+          setName(name);
         }
 
       } catch {
@@ -49,5 +49,5 @@ export const useViewerToken = (hostIdentity: string) => {
   //console.log({ token, name, identity });
 
 
-  return { token, name, identity };
+  return { token, name, viewerIdentity };
 };

@@ -6,7 +6,7 @@ export enum ChatVariant {
 }
 
 interface ChatSidebarStore {
-  collapsed: boolean;
+  chatCollapsed: boolean;
   variant: ChatVariant;
   onExpand: () => void;
   onCollapse: () => void;
@@ -14,9 +14,9 @@ interface ChatSidebarStore {
 }
 
 export const useChatSidebar = create<ChatSidebarStore>((set) => ({
-  collapsed: false,
+  chatCollapsed: false,
   variant: ChatVariant.CHAT,
-  onExpand: () => set(() => ({ collapsed: false })),
-  onCollapse: () => set(() => ({ collapsed: true })),
+  onExpand: () => set(() => ({ chatCollapsed: false })),
+  onCollapse: () => set(() => ({ chatCollapsed: true })),
   onChangeVariant: (variant: ChatVariant) => set(() => ({ variant }))
 }));

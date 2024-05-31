@@ -1,9 +1,9 @@
-import { UserItemProps } from "@/app/(browse)/_components/sidebar/user-item";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Avatar } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Skeleton } from "./ui/skeleton";
+import { LiveBadge } from "./live-badge";
 
 const avatarSizes = cva("", {
   variants: {
@@ -32,6 +32,8 @@ export const UserAvatar = ({
   size,
 }: UserAvatarProps) => {
   const canShowBadge = showBadge && isLive;
+  //console.log(isLive);
+
   return (
     <div className="relative">
       <Avatar
@@ -48,7 +50,7 @@ export const UserAvatar = ({
       </Avatar>
       {canShowBadge && (
         <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
-          
+          <LiveBadge />
         </div>
       )}
     </div>
