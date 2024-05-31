@@ -63,6 +63,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     console.log(error);
     return NextResponse.json({
       error: "Internal server error"
-    });
+    })
   }
 }

@@ -5,5 +5,5 @@ export default function CreatorLoading() {
     <div className="h-full">
       <StreamPlayerSkeleton />
     </div>
-  );
+  )
 }

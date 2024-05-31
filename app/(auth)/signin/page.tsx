@@ -23,7 +23,7 @@ export default function signin() {
       <img className="mr-2" title="Google Icon" src="/google.svg" />
       Continue with Google
     </Button>
-  );
+  )
   {
     /* <div>
       <div className="bg-gray-200 rounded-full">

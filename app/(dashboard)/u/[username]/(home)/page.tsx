@@ -18,5 +18,5 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
     <div className="h-full">
       <StreamPlayer user={user} stream={user.stream} isFollowing />
     </div>
-  );
+  )
 }

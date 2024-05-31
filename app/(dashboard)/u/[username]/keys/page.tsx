@@ -24,5 +24,5 @@ export default async function KeysPage() {
         <KeyCard value={stream.streamKey} />
       </div>
     </div>
-  );
+  )
 }

@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       data: {
         isLive: false
       }
-    });
+    })
   }
 
   return new NextResponse("Success");

@@ -26,5 +26,5 @@ export default async function CreatorLayout({
         <Container>{children}</Container>
       </div>
     </>
-  );
+  )
 }
