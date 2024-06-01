@@ -12,7 +12,7 @@ export default async function BrowseLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session: Session | null = await getServerSession(authOptions);
+ /*  const session: Session | null = await getServerSession(authOptions); */
 
   /*  {
     session ?? redirect("/signin");

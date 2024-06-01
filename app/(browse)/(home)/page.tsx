@@ -1,13 +1,12 @@
-import { authOptions } from "@/app/api/auth/libs/auth";
-import { Appbar } from "@/components/Appbar";
-import { UpdateScreen } from "@/components/UpdateScreen";
-import { Session, getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { Results, ResultsSkeleton } from "./_components/results";
+import { Suspense } from "react";
 
-export default async function Home() {
-  const session: Session | null = await getServerSession(authOptions);
-
-  //{session ?? redirect("/signin")}
-  
-  return <div>HomePage</div>;
+export default function Page() {
+  return (
+    <div className="h-full p-8 max-w-screen-2xl mx-auto">
+      <Suspense fallback={<ResultsSkeleton />}>
+        <Results />
+      </Suspense>
+    </div>
+  );
 }

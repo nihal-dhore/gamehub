@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { Avatar } from "@/components/ui/avatar";
+
 import { cn } from "@/lib/utils";
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { AvatarFallback, AvatarImage, Avatar } from "@/components/ui/avatar";
 import { Skeleton } from "./ui/skeleton";
 import { LiveBadge } from "./live-badge";
 
