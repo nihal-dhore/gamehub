@@ -1,4 +1,3 @@
-
 import { Sidebar, SidebarSkeleton } from "@/app/(browse)/_components/sidebar";
 import { Container } from "./_components/container";
 import { Session, getServerSession } from "next-auth";
@@ -15,23 +14,23 @@ export default async function BrowseLayout({
 }) {
   const session: Session | null = await getServerSession(authOptions);
 
-  {
+  /*  {
     session ?? redirect("/signin");
-  }
+  } */
 
-  if (!session?.user.username) {
+  /* if (!session?.user.username) {
     return (
       <>
         <Navbar />
         <UpdateScreen />
       </>
     );
-  }
+  } */
 
   return (
     <>
       <Navbar />
-      <div className="pt-20">
+      <div className="flex h-full pt-20">
         <Suspense fallback={<SidebarSkeleton />}>
           <Sidebar />
         </Suspense>

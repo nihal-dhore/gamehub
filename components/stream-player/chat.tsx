@@ -14,6 +14,7 @@ import { ChatHeader, ChatHeaderSkeleton } from "./chat-header";
 import { ChatForm, ChatFormSkeleton } from "./chat-form";
 import { ChatList, ChatListSkeleton } from "./chat-list";
 import { ChatCommunity } from "./chat-community";
+import { revalidatePath } from "next/cache";
 
 interface ChatProps {
   hostName: string;
@@ -65,6 +66,7 @@ export const Chat = ({
   const onChange = (value: string) => {
     setValue(value);
   };
+
   return (
     <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
       <ChatHeader />

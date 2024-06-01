@@ -54,9 +54,9 @@ export const Actions = ({
     }
 
     if (isFollowing) {
-      handleFollow();
-    } else {
       handleUnfollow();
+    } else {
+      handleFollow();
     }
   };
   return (
