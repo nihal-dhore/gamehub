@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { UserAvatar } from "./user-avatar";
-import { LiveBadge } from "./live-badge";
+import { LiveBadge } from "@/components/live-badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface ThumbnailProps {
@@ -19,7 +19,7 @@ export const Thumbnail = ({
 
   if (!src) {
     content = (
-      <div className="bg-background flex flex-col items-center justify-center gap-y-4 h-full w-full transition-transform">
+      <div className="bg-background flex flex-col items-center justify-center gap-y-4 h-full w-full transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 ">
         <UserAvatar
           size={"lg"}
           showBadge
@@ -35,7 +35,7 @@ export const Thumbnail = ({
         src={src}
         fill
         alt="Thumbnail"
-        className="object-cover transition-transform group-hover:translate-x-2 group-hover:translate-y-2 rounded-md"
+        className="object-cover transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 rounded-md"
       />
     );
   }
