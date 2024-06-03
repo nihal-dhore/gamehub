@@ -1,22 +1,30 @@
-import { authOptions } from "@/app/api/auth/libs/auth";
 import { db } from "@/lib/db";
-import { Session, getServerSession } from "next-auth";
+import { getSelf } from "./auth-service";
 
 export const getRecommended = async () => {
-  const session: Session | null = await getServerSession(authOptions);
-  //await new Promise(resolve => setTimeout(resolve, 5000))
+  let userId;
+
   try {
-    const users = await db.user.findMany({
+    const self = await getSelf();
+    userId = self.id;
+  } catch {
+    userId = null;
+  }
+
+  let users = [];
+
+  if (userId) {
+    users = await db.user.findMany({
       where: {
         AND: [{
           NOT: {
-            id: session?.user.id
+            id: userId
           },
         }, {
           NOT: {
             followedBy: {
               some: {
-                followerId: session?.user.id
+                followerId: userId
               }
             }
           }
@@ -24,7 +32,7 @@ export const getRecommended = async () => {
           NOT: {
             Blocking: {
               some: {
-                blockedId: session?.user.id
+                blockedId: userId
               }
             }
           }
@@ -41,8 +49,25 @@ export const getRecommended = async () => {
         createdAt: "desc"
       }
     });
-    return users;
-  } catch (error) {
-    throw new Error("Internal server error");
+  } else {
+    users = await db.user.findMany({
+      include: {
+        stream: {
+          select: {
+            isLive: true
+          }
+        }
+      },
+      orderBy: [
+        {
+          stream: {
+            isLive: "desc"
+          }
+        }, {
+          createdAt: "desc"
+        }
+      ]
+    });
   }
+  return users;
 }; 

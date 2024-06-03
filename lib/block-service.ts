@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/libs/auth";
 import { Session, getServerSession } from "next-auth";
 import { db } from "./db";
+import { getSelf } from "./auth-service";
 
 export const isBlockedByUser = async (id: string) => {
   try {
@@ -45,7 +46,7 @@ export const blockUser = async (id: string) => {
     throw new Error("Unauthorized access");
   }
   //console.log(session);
-  
+
   if (session.user.id === id) {
     throw new Error("Cannot block yourself");
   }
@@ -56,7 +57,7 @@ export const blockUser = async (id: string) => {
     }
   });
   //console.log(otherUser);
-  
+
   if (!otherUser) {
     throw new Error("User not found");
   }
@@ -128,4 +129,19 @@ export const unblockUser = async (id: string) => {
     }
   });
   return unblock;
-};  
+};
+
+export const getBlockedUsers = async () => {
+  const self = await getSelf();
+
+  const blockedUsers = await db.block.findMany({
+    where: {
+      blockerId: self.id
+    },
+    include: {
+      blocked: true
+    }
+  });
+
+  return blockedUsers;
+};
