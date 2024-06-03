@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { ToggleCardSkeleton } from "./page";
-import { resolve } from "path";
+import { ToggleCardSkeleton } from "./_components/toggle-card";
+
 
 export default function ChatLoading() {
   return (
@@ -12,5 +12,5 @@ export default function ChatLoading() {
         <ToggleCardSkeleton />
       </div>
     </div>
-  )
+  );
 }
