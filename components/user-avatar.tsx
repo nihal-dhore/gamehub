@@ -44,8 +44,8 @@ export const UserAvatar = ({
       >
         <AvatarImage src={imageUrl} className="object-cover" />
         <AvatarFallback className="w-full text-center">
-          {username[0]}
-          {username[username.length - 1]}
+          {username && username[0]}
+          { username && username[username.length - 1]}
         </AvatarFallback>
       </Avatar>
       {canShowBadge && (
